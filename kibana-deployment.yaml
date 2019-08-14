@@ -1,0 +1,26 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  name: kibana
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        name: kibana
+    spec:
+      containers:
+      - image: fkhoda/kibana:5.5.1
+        env:
+        - name: ELASTICSEARCH_URL
+          value: http://172.31.43.153:9200         
+        name: kibana
+        ports:
+        - containerPort: 5601
+        resources: {}
+      restartPolicy: Always
+status: {}
